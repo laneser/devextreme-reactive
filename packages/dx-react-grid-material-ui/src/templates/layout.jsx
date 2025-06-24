@@ -16,9 +16,9 @@ const StyledDiv = styled('div')(() => ({
 }));
 
 export const Root = ({
-  children, 
-  className = undefined, 
-  rootRef = undefined, 
+  children,
+  className = undefined,
+  rootRef = undefined,
   ...restProps
 }) => (
   <StyledDiv

@@ -21,8 +21,8 @@ const styles = ({ theme }) => ({
 class FocusCellBase extends React.PureComponent {
   render() {
     const {
-      className,
-      focused,
+      className = undefined,
+      focused = undefined,
       component: CellPlaceholder,
       ...restProps
     } = this.props;
@@ -43,11 +43,6 @@ FocusCellBase.propTypes = {
   component: PropTypes.func.isRequired,
   className: PropTypes.string,
   focused: PropTypes.bool,
-};
-
-FocusCellBase.defaultProps = {
-  className: undefined,
-  focused: undefined,
 };
 
 export const FocusCell = withKeyboardNavigation()(styled(FocusCellBase)(styles));

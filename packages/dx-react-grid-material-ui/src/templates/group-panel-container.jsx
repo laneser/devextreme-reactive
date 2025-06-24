@@ -18,10 +18,7 @@ const StyledDiv = styled('div')(({ theme }) => ({
 }));
 
 export const GroupPanelContainer = ({
-  children,
-  className,
-  forwardedRef,
-  ...restProps
+  children = undefined, className = undefined, forwardedRef = undefined, ...restProps
 }) => (
   <StyledDiv
     ref={forwardedRef}
@@ -36,10 +33,4 @@ GroupPanelContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
-
-GroupPanelContainer.defaultProps = {
-  children: undefined,
-  className: undefined,
-  forwardedRef: undefined,
 };

@@ -46,8 +46,8 @@ export class FilterSelector extends React.PureComponent {
 
   render() {
     const {
-      value, availableValues, disabled, getMessage,
-      iconComponent: Icon, toggleButtonComponent: ToggleButton,
+      value = undefined, availableValues = [], disabled = false, getMessage,
+      iconComponent: Icon, toggleButtonComponent: ToggleButton, onChange = () => { },
     } = this.props;
     const { opened } = this.state;
 
@@ -108,11 +108,4 @@ FilterSelector.propTypes = {
   // oneOfType is a workaround because withStyles returns react object
   toggleButtonComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   getMessage: PropTypes.func.isRequired,
-};
-
-FilterSelector.defaultProps = {
-  value: undefined,
-  availableValues: [],
-  onChange: () => {},
-  disabled: false,
 };

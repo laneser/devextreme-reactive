@@ -13,7 +13,7 @@ const defaultMessages = {
   sortingHint: 'Sort',
 };
 
-const TableHeaderRowWithMessages = withPatchedProps(({ messages, ...restProps }) => ({
+const TableHeaderRowWithMessages = withPatchedProps(({ messages = {}, ...restProps }) => ({
   messages: { ...defaultMessages, ...messages },
   ...restProps,
 }))(TableHeaderRowBase);
@@ -22,10 +22,6 @@ TableHeaderRowWithMessages.propTypes = {
   messages: PropTypes.shape({
     sortingHint: PropTypes.string,
   }),
-};
-
-TableHeaderRowWithMessages.defaultProps = {
-  messages: {},
 };
 
 TableHeaderRowWithMessages.components = TableHeaderRowBase.components;

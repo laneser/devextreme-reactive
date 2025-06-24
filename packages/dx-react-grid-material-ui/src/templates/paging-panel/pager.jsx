@@ -31,8 +31,8 @@ const PagerBase = ({
   onPageSizeChange,
   totalCount,
   getMessage,
-  className,
-  forwardedRef,
+  className = undefined,
+  forwardedRef = undefined,
   ...restProps
 }) => (
   <StyledDiv
@@ -41,12 +41,12 @@ const PagerBase = ({
     {...restProps}
   >
     {!!pageSizes.length && (
-    <PageSizeSelector
-      pageSize={pageSize}
-      onPageSizeChange={onPageSizeChange}
-      pageSizes={pageSizes}
-      getMessage={getMessage}
-    />
+      <PageSizeSelector
+        pageSize={pageSize}
+        onPageSizeChange={onPageSizeChange}
+        pageSizes={pageSizes}
+        getMessage={getMessage}
+      />
     )}
     <Pagination
       totalPages={totalPages}
@@ -70,11 +70,6 @@ PagerBase.propTypes = {
   getMessage: PropTypes.func.isRequired,
   className: PropTypes.string,
   forwardedRef: PropTypes.func,
-};
-
-PagerBase.defaultProps = {
-  className: undefined,
-  forwardedRef: undefined,
 };
 
 export const Pager = withKeyboardNavigation('paging', 'none')(PagerBase);

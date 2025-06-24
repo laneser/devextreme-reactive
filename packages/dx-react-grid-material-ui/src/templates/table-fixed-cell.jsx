@@ -26,14 +26,14 @@ const styles = ({ theme }) => ({
 class FixedCellBase extends React.PureComponent {
   render() {
     const {
-      className,
+      className = undefined,
       component: CellPlaceholder,
-      position,
-      selected,
-      showLeftDivider,
-      showRightDivider,
+      position = undefined,
+      selected = false,
+      showLeftDivider = false,
+      showRightDivider = false,
       side,
-      style,
+      style = null,
       ...restProps
     } = this.props;
 
@@ -64,15 +64,6 @@ FixedCellBase.propTypes = {
   showRightDivider: PropTypes.bool,
   side: PropTypes.string.isRequired,
   style: PropTypes.object,
-};
-
-FixedCellBase.defaultProps = {
-  className: undefined,
-  position: undefined,
-  selected: false,
-  showLeftDivider: false,
-  showRightDivider: false,
-  style: null,
 };
 
 export const FixedCell = styled(FixedCellBase)(styles);

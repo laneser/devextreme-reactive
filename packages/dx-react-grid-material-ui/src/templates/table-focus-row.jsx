@@ -17,9 +17,9 @@ const styles = ({ theme }) => ({
 class FocusRowBase extends React.PureComponent {
   render() {
     const {
-      className,
+      className = undefined,
       component: RowPlaceholder,
-      focused,
+      focused = undefined,
       ...restProps
     } = this.props;
 
@@ -38,11 +38,6 @@ FocusRowBase.propTypes = {
   component: PropTypes.func.isRequired,
   className: PropTypes.string,
   focused: PropTypes.bool,
-};
-
-FocusRowBase.defaultProps = {
-  className: undefined,
-  focused: undefined,
 };
 
 export const FocusRow = styled(FocusRowBase)(styles);

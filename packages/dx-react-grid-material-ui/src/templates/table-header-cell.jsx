@@ -6,8 +6,52 @@ import { DragSource } from '@devexpress/dx-react-core';
 import { CellLayout } from './table-header-cell/cell-layout';
 
 export class TableHeaderCell extends React.PureComponent {
+  static propTypes = {
+    tableColumn: PropTypes.object,
+    tableRow: PropTypes.object,
+    column: PropTypes.object,
+    style: PropTypes.object,
+    draggingEnabled: PropTypes.bool,
+    resizingEnabled: PropTypes.bool,
+    onWidthChange: PropTypes.func,
+    onWidthDraft: PropTypes.func,
+    onWidthDraftCancel: PropTypes.func,
+    className: PropTypes.string,
+    children: PropTypes.node,
+    getCellWidth: PropTypes.func,
+  };
+
   constructor(props) {
-    super(props);
+    const {
+      column = undefined,
+      tableColumn = undefined,
+      tableRow = undefined,
+      style = null,
+      draggingEnabled = false,
+      resizingEnabled = false,
+      onWidthChange = undefined,
+      onWidthDraft = undefined,
+      onWidthDraftCancel = undefined,
+      className = undefined,
+      children = undefined,
+      getCellWidth = () => { },
+      ...rest
+    } = props;
+    super({
+      column,
+      tableColumn,
+      tableRow,
+      style,
+      draggingEnabled,
+      resizingEnabled,
+      onWidthChange,
+      onWidthDraft,
+      onWidthDraftCancel,
+      className,
+      children,
+      getCellWidth,
+      ...rest,
+    });
 
     this.state = {
       dragging: false,
@@ -40,33 +84,3 @@ export class TableHeaderCell extends React.PureComponent {
     ) : <CellLayout {...this.props} dragging={dragging} />;
   }
 }
-
-TableHeaderCell.propTypes = {
-  tableColumn: PropTypes.object,
-  tableRow: PropTypes.object,
-  column: PropTypes.object,
-  style: PropTypes.object,
-  draggingEnabled: PropTypes.bool,
-  resizingEnabled: PropTypes.bool,
-  onWidthChange: PropTypes.func,
-  onWidthDraft: PropTypes.func,
-  onWidthDraftCancel: PropTypes.func,
-  className: PropTypes.string,
-  children: PropTypes.node,
-  getCellWidth: PropTypes.func,
-};
-
-TableHeaderCell.defaultProps = {
-  column: undefined,
-  tableColumn: undefined,
-  tableRow: undefined,
-  style: null,
-  draggingEnabled: false,
-  resizingEnabled: false,
-  onWidthChange: undefined,
-  onWidthDraft: undefined,
-  onWidthDraftCancel: undefined,
-  className: undefined,
-  children: undefined,
-  getCellWidth: () => {},
-};

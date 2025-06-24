@@ -6,7 +6,7 @@ import { IconButton } from '@mui/material';
 
 export const Icon = React.memo(({
   expanded,
-  className,
+  className = undefined,
   ...restProps
 }) => (
   <IconButton
@@ -24,8 +24,4 @@ export const Icon = React.memo(({
 Icon.propTypes = {
   expanded: PropTypes.bool.isRequired,
   className: PropTypes.string,
-};
-
-Icon.defaultProps = {
-  className: undefined,
 };

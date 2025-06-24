@@ -8,7 +8,7 @@ const defaultMessages = {
   rowsPerPage: 'Rows per page:',
 };
 
-const PagingPanelWithMessages = withPatchedProps(({ messages, ...restProps }) => ({
+const PagingPanelWithMessages = withPatchedProps(({ messages = {}, ...restProps }) => ({
   messages: { ...defaultMessages, ...messages },
   ...restProps,
 }))(PagingPanelBase);
@@ -22,10 +22,6 @@ PagingPanelWithMessages.propTypes = {
       PropTypes.func,
     ]),
   }),
-};
-
-PagingPanelWithMessages.defaultProps = {
-  messages: {},
 };
 
 PagingPanelWithMessages.components = PagingPanelBase.components;

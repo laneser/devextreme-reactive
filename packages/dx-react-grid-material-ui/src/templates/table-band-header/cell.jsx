@@ -32,8 +32,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export const Cell = ({
-  column, value, children, tableRow, tableColumn, row, className, beforeBorder,
-  forwardedRef, ...restProps
+  column = undefined,
+  value = undefined,
+  children = undefined,
+  tableRow = undefined,
+  tableColumn = undefined,
+  row = undefined,
+  className = undefined,
+  beforeBorder = false,
+  forwardedRef = undefined,
+  ...restProps
 }) => (
   <StyledTableCell
     className={classNames({
@@ -57,16 +65,4 @@ Cell.propTypes = {
   className: PropTypes.string,
   beforeBorder: PropTypes.bool,
   forwardedRef: PropTypes.func,
-};
-
-Cell.defaultProps = {
-  value: undefined,
-  column: undefined,
-  row: undefined,
-  children: undefined,
-  tableRow: undefined,
-  tableColumn: undefined,
-  className: undefined,
-  beforeBorder: false,
-  forwardedRef: undefined,
 };

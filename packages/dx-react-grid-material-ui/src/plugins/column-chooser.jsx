@@ -11,7 +11,7 @@ const defaultMessages = {
   showColumnChooser: 'Show Column Chooser',
 };
 
-const ColumnChooserWithMessages = withPatchedProps(({ messages, ...restProps }) => ({
+const ColumnChooserWithMessages = withPatchedProps(({ messages = {}, ...restProps }) => ({
   messages: { ...defaultMessages, ...messages },
   ...restProps,
 }))(ColumnChooserBase);
@@ -20,10 +20,6 @@ ColumnChooserWithMessages.propTypes = {
   messages: PropTypes.shape({
     hiddenColumnNames: PropTypes.string,
   }),
-};
-
-ColumnChooserWithMessages.defaultProps = {
-  messages: {},
 };
 
 ColumnChooserWithMessages.components = ColumnChooserBase.components;
