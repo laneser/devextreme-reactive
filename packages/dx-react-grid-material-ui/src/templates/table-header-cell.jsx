@@ -6,52 +6,8 @@ import { DragSource } from '@devexpress/dx-react-core';
 import { CellLayout } from './table-header-cell/cell-layout';
 
 export class TableHeaderCell extends React.PureComponent {
-  static propTypes = {
-    tableColumn: PropTypes.object,
-    tableRow: PropTypes.object,
-    column: PropTypes.object,
-    style: PropTypes.object,
-    draggingEnabled: PropTypes.bool,
-    resizingEnabled: PropTypes.bool,
-    onWidthChange: PropTypes.func,
-    onWidthDraft: PropTypes.func,
-    onWidthDraftCancel: PropTypes.func,
-    className: PropTypes.string,
-    children: PropTypes.node,
-    getCellWidth: PropTypes.func,
-  };
-
   constructor(props) {
-    const {
-      column = undefined,
-      tableColumn = undefined,
-      tableRow = undefined,
-      style = null,
-      draggingEnabled = false,
-      resizingEnabled = false,
-      onWidthChange = undefined,
-      onWidthDraft = undefined,
-      onWidthDraftCancel = undefined,
-      className = undefined,
-      children = undefined,
-      getCellWidth = () => { },
-      ...rest
-    } = props;
-    super({
-      column,
-      tableColumn,
-      tableRow,
-      style,
-      draggingEnabled,
-      resizingEnabled,
-      onWidthChange,
-      onWidthDraft,
-      onWidthDraftCancel,
-      className,
-      children,
-      getCellWidth,
-      ...rest,
-    });
+    super(props);
 
     this.state = {
       dragging: false,
@@ -69,18 +25,79 @@ export class TableHeaderCell extends React.PureComponent {
   }
 
   render() {
-    const { column, draggingEnabled } = this.props;
+    const {
+      column = undefined,
+      tableColumn = undefined,
+      tableRow = undefined,
+      style = null,
+      draggingEnabled = false,
+      resizingEnabled = false,
+      onWidthChange = undefined,
+      onWidthDraft = undefined,
+      onWidthDraftCancel = undefined,
+      className = undefined,
+      children = undefined,
+      getCellWidth = () => {},
+      ...restProps
+    } = this.props;
     const { dragging } = this.state;
 
     return draggingEnabled ? (
       <DragSource
         ref={this.dragRef}
-        payload={[{ type: 'column', columnName: column.name }]}
+        payload={[{ type: 'column', columnName: column && column.name }]}
         onStart={this.onDragStart}
         onEnd={this.onDragEnd}
       >
-        <CellLayout {...this.props} dragging={dragging} />
+        <CellLayout
+          column={column}
+          tableColumn={tableColumn}
+          tableRow={tableRow}
+          style={style}
+          draggingEnabled={draggingEnabled}
+          resizingEnabled={resizingEnabled}
+          onWidthChange={onWidthChange}
+          onWidthDraft={onWidthDraft}
+          onWidthDraftCancel={onWidthDraftCancel}
+          className={className}
+          children={children}
+          getCellWidth={getCellWidth}
+          dragging={dragging}
+          {...restProps}
+        />
       </DragSource>
-    ) : <CellLayout {...this.props} dragging={dragging} />;
+    ) : (
+      <CellLayout
+        column={column}
+        tableColumn={tableColumn}
+        tableRow={tableRow}
+        style={style}
+        draggingEnabled={draggingEnabled}
+        resizingEnabled={resizingEnabled}
+        onWidthChange={onWidthChange}
+        onWidthDraft={onWidthDraft}
+        onWidthDraftCancel={onWidthDraftCancel}
+        className={className}
+        children={children}
+        getCellWidth={getCellWidth}
+        dragging={dragging}
+        {...restProps}
+      />
+    );
   }
 }
+
+TableHeaderCell.propTypes = {
+  tableColumn: PropTypes.object,
+  tableRow: PropTypes.object,
+  column: PropTypes.object,
+  style: PropTypes.object,
+  draggingEnabled: PropTypes.bool,
+  resizingEnabled: PropTypes.bool,
+  onWidthChange: PropTypes.func,
+  onWidthDraft: PropTypes.func,
+  onWidthDraftCancel: PropTypes.func,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  getCellWidth: PropTypes.func,
+};
