@@ -30,12 +30,11 @@ class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
   };
 
   constructor(props: TableHeaderRowProps) {
-    const defaultProps = {
+    super({
       showSortingControls: false,
       showGroupingControls: false,
-      messages: {},
-    };
-    super({ ...defaultProps, ...props });
+      messages: {}, ...props
+    });
   }
 
   render() {

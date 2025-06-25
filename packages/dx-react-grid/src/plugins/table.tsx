@@ -58,10 +58,7 @@ class TableBase extends React.PureComponent<TableProps> {
   };
 
   constructor(props: TableProps) {
-    const defaultProps = {
-      messages: {},
-    };
-    super({ ...defaultProps, ...props });
+    super({ messages: {}, ...props });
   }
 
   render() {

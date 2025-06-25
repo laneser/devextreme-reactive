@@ -38,15 +38,12 @@ class TableColumnVisibilityBase extends React.PureComponent<TableColumnVisibilit
   toggleColumnVisibility: ActionFn<string[]>;
 
   constructor(props: TableColumnVisibilityProps) {
-    const propsWithDefaults: TableColumnVisibilityProps = {
-      defaultHiddenColumnNames: [],
-      messages: {},
-      columnTogglingEnabled: true,
-      ...props,
-    }
-    super(propsWithDefaults);
+    const {
+      defaultHiddenColumnNames = [],
+    } = props;
+    super(props);
     this.state = {
-      hiddenColumnNames: propsWithDefaults.hiddenColumnNames || propsWithDefaults.defaultHiddenColumnNames || [],
+      hiddenColumnNames: props.hiddenColumnNames || defaultHiddenColumnNames,
     };
     const stateHelper = createStateHelper(
       this,
@@ -76,11 +73,12 @@ class TableColumnVisibilityBase extends React.PureComponent<TableColumnVisibilit
   render() {
     const {
       emptyMessageComponent: EmptyMessage,
-      messages,
+      messages = {},
+      columnTogglingEnabled = true,
+      columnExtensions,
     } = this.props;
     const getMessage = getMessagesFormatter({ ...defaultMessages, ...messages });
     const { hiddenColumnNames } = this.state;
-    const { columnExtensions, columnTogglingEnabled } = this.props;
 
     return (
       <Plugin
