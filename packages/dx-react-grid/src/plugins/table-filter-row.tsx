@@ -39,10 +39,6 @@ const defaultMessages = {
 
 class TableFilterRowBase extends React.PureComponent<TableFilterRowProps, TableFilterRowState> {
   static ROW_TYPE = TABLE_FILTER_TYPE;
-  static defaultProps = {
-    showFilterSelector: false,
-    messages: {},
-  };
   static components = {
     rowComponent: 'Row',
     cellComponent: 'Cell',
@@ -52,8 +48,12 @@ class TableFilterRowBase extends React.PureComponent<TableFilterRowProps, TableF
     toggleButtonComponent: 'ToggleButton',
   };
 
-  constructor(props) {
-    super(props);
+  constructor(props: TableFilterRowProps) {
+    const defaultProps = {
+      showFilterSelector: false,
+      messages: {},
+    };
+    super({ ...defaultProps, ...props });
 
     this.state = {
       filterOperations: {},

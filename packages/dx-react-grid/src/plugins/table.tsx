@@ -41,9 +41,6 @@ class TableBase extends React.PureComponent<TableProps> {
   static COLUMN_TYPE = TABLE_DATA_TYPE;
   static ROW_TYPE = TABLE_DATA_TYPE;
   static NODATA_ROW_TYPE = TABLE_NODATA_TYPE;
-  static defaultProps = {
-    messages: {},
-  };
   static components = {
     tableComponent: 'Table',
     headComponent: 'TableHead',
@@ -59,6 +56,13 @@ class TableBase extends React.PureComponent<TableProps> {
     stubCellComponent: 'StubCell',
     stubHeaderCellComponent: 'StubHeaderCell',
   };
+
+  constructor(props: TableProps) {
+    const defaultProps = {
+      messages: {},
+    };
+    super({ ...defaultProps, ...props });
+  }
 
   render() {
     const {

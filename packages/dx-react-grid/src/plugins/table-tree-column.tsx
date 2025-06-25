@@ -6,10 +6,6 @@ import { isTreeTableCell } from '@devexpress/dx-grid-core';
 import { TableTreeColumnProps, TableCellProps } from '../types';
 
 class TableTreeColumnBase extends React.PureComponent<TableTreeColumnProps> {
-  static defaultProps = {
-    showSelectionControls: false,
-    showSelectAll: false,
-  };
   static components = {
     cellComponent: 'Cell',
     contentComponent: 'Content',
@@ -17,6 +13,14 @@ class TableTreeColumnBase extends React.PureComponent<TableTreeColumnProps> {
     expandButtonComponent: 'ExpandButton',
     checkboxComponent: 'Checkbox',
   };
+
+  constructor(props: TableTreeColumnProps) {
+    const defaultProps = {
+      showSelectionControls: false,
+      showSelectAll: false,
+    };
+    super({ ...defaultProps, ...props });
+  }
 
   render() {
     const {
@@ -50,7 +54,7 @@ class TableTreeColumnBase extends React.PureComponent<TableTreeColumnProps> {
           <ExpandButton
             visible={false}
             expanded={false}
-            onToggle={() => {}}
+            onToggle={() => { }}
           />
           {showSelectionControls && showSelectAll && (
             <TemplateConnector>

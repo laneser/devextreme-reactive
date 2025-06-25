@@ -66,10 +66,6 @@ const getCellColSpanComputed = (
 class TableGroupRowBase extends React.PureComponent<TableGroupRowProps> {
   static ROW_TYPE = TABLE_GROUP_TYPE;
   static COLUMN_TYPE = TABLE_GROUP_TYPE;
-  static defaultProps = {
-    showColumnsWhenGrouped: false,
-    formatlessSummaryTypes: [],
-  };
   static components = {
     rowComponent: 'Row',
     cellComponent: 'Cell',
@@ -83,6 +79,14 @@ class TableGroupRowBase extends React.PureComponent<TableGroupRowProps> {
     summaryItemComponent: 'SummaryItem',
     stubCellComponent: 'StubCell',
   };
+
+  constructor(props: TableGroupRowProps) {
+    const defaultProps = {
+      showColumnsWhenGrouped: false,
+      formatlessSummaryTypes: [],
+    };
+    super({ ...defaultProps, ...props });
+  }
 
   render() {
     const {
@@ -99,10 +103,10 @@ class TableGroupRowBase extends React.PureComponent<TableGroupRowProps> {
       stubCellComponent: StubCell,
       indentColumnWidth,
       contentCellPadding,
-      showColumnsWhenGrouped,
+      showColumnsWhenGrouped = false,
       columnExtensions,
       messages,
-      formatlessSummaryTypes,
+      formatlessSummaryTypes = [],
     } = this.props;
 
     const getMessage = getMessagesFormatter({ ...defaultMessages, ...messages });

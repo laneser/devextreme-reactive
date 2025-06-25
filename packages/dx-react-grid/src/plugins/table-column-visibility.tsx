@@ -32,21 +32,21 @@ const columnExtensionValueGetter = (
 
 // tslint:disable-next-line: max-line-length
 class TableColumnVisibilityBase extends React.PureComponent<TableColumnVisibilityProps, TableColumnVisibilityState> {
-  static defaultProps = {
-    defaultHiddenColumnNames: [],
-    messages: {},
-    columnTogglingEnabled: true,
-  };
   static components = {
     emptyMessageComponent: 'EmptyMessage',
   };
   toggleColumnVisibility: ActionFn<string[]>;
 
-  constructor(props) {
-    super(props);
-
+  constructor(props: TableColumnVisibilityProps) {
+    const propsWithDefaults: TableColumnVisibilityProps = {
+      defaultHiddenColumnNames: [],
+      messages: {},
+      columnTogglingEnabled: true,
+      ...props,
+    }
+    super(propsWithDefaults);
     this.state = {
-      hiddenColumnNames: props.hiddenColumnNames || props.defaultHiddenColumnNames,
+      hiddenColumnNames: propsWithDefaults.hiddenColumnNames || propsWithDefaults.defaultHiddenColumnNames || [],
     };
     const stateHelper = createStateHelper(
       this,

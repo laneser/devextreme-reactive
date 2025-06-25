@@ -46,17 +46,13 @@ const tableBodyRowsComputed = ({
 const tableFooterRowsComputed = ({
   tableFooterRows, totalSummaryItems,
 }: Getters) => totalSummaryItems.length
-  ? tableRowsWithTotalSummaries(tableFooterRows)
-  : tableFooterRows;
+    ? tableRowsWithTotalSummaries(tableFooterRows)
+    : tableFooterRows;
 
 export class TableSummaryRowBase extends React.PureComponent<TableSummaryRowProps> {
   static TREE_ROW_TYPE = TABLE_TREE_SUMMARY_TYPE;
   static GROUP_ROW_TYPE = TABLE_GROUP_SUMMARY_TYPE;
   static TOTAL_ROW_TYPE = TABLE_TOTAL_SUMMARY_TYPE;
-  static defaultProps = {
-    formatlessSummaryTypes: [],
-    messages: {},
-  };
   static components = {
     totalRowComponent: 'TotalRow',
     groupRowComponent: 'GroupRow',
@@ -70,11 +66,19 @@ export class TableSummaryRowBase extends React.PureComponent<TableSummaryRowProp
     itemComponent: 'Item',
   };
 
+  constructor(props: TableSummaryRowProps) {
+    const defaultProps = {
+      formatlessSummaryTypes: [],
+      messages: {},
+    };
+    super({ ...defaultProps, ...props });
+  }
+
   renderContent(column, columnSummaries) {
     const {
-      formatlessSummaryTypes,
+      formatlessSummaryTypes = [],
       itemComponent: Item,
-      messages,
+      messages = {},
     } = this.props;
 
     return (

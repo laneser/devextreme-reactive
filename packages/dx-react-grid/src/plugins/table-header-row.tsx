@@ -20,11 +20,6 @@ const tableHeaderRowsComputed = (
 
 class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
   static ROW_TYPE = TABLE_HEADING_TYPE;
-  static defaultProps = {
-    showSortingControls: false,
-    showGroupingControls: false,
-    messages: {},
-  };
   static components = {
     cellComponent: 'Cell',
     rowComponent: 'Row',
@@ -34,17 +29,26 @@ class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
     groupButtonComponent: 'GroupButton',
   };
 
+  constructor(props: TableHeaderRowProps) {
+    const defaultProps = {
+      showSortingControls: false,
+      showGroupingControls: false,
+      messages: {},
+    };
+    super({ ...defaultProps, ...props });
+  }
+
   render() {
     const {
-      showSortingControls,
-      showGroupingControls,
+      showSortingControls = false,
+      showGroupingControls = false,
       cellComponent: HeaderCell,
       rowComponent: HeaderRow,
       contentComponent: Content,
       sortLabelComponent: SortLabel,
       groupButtonComponent: GroupButton,
       titleComponent: Title,
-      messages,
+      messages = {},
     } = this.props;
     const getMessage = getMessagesFormatter(messages!);
 
@@ -73,7 +77,7 @@ class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
               }, {
                 changeColumnSorting, changeColumnGrouping,
                 changeTableColumnWidth, draftTableColumnWidth, cancelTableColumnWidthDraft,
-                storeWidthGetters = () => {},
+                storeWidthGetters = () => { },
               }) => {
                 const { name: columnName, title: columnTitle } = params.tableColumn.column!;
                 const atLeastOneDataColumn = tableColumns
@@ -102,7 +106,7 @@ class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
                     })}
                     onWidthDraftCancel={() => cancelTableColumnWidthDraft()}
                     getCellWidth={getter => storeWidthGetters({
-                      tableColumn: params.tableColumn , getter, tableColumns,
+                      tableColumn: params.tableColumn, getter, tableColumns,
                     })}
                   >
                     <TemplatePlaceholder
