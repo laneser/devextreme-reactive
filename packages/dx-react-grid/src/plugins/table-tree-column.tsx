@@ -14,12 +14,9 @@ class TableTreeColumnBase extends React.PureComponent<TableTreeColumnProps> {
     checkboxComponent: 'Checkbox',
   };
 
-  constructor(props: TableTreeColumnProps) {
-    const defaultProps = {
-      showSelectionControls: false,
-      showSelectAll: false,
-    };
-    super({ ...defaultProps, ...props });
+  static defaultProps = {
+    showSelectionControls: false,
+    showSelectAll: false,
   }
 
   render() {

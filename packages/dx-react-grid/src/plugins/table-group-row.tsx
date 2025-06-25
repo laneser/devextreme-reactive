@@ -80,13 +80,10 @@ class TableGroupRowBase extends React.PureComponent<TableGroupRowProps> {
     stubCellComponent: 'StubCell',
   };
 
-  constructor(props: TableGroupRowProps) {
-    const defaultProps = {
-      showColumnsWhenGrouped: false,
-      formatlessSummaryTypes: [],
-    };
-    super({ ...defaultProps, ...props });
-  }
+  static defaultProps = {
+    showColumnsWhenGrouped: false,
+    formatlessSummaryTypes: [],
+  };
 
   render() {
     const {

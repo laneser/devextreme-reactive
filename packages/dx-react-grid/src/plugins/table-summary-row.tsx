@@ -66,12 +66,9 @@ export class TableSummaryRowBase extends React.PureComponent<TableSummaryRowProp
     itemComponent: 'Item',
   };
 
-  constructor(props: TableSummaryRowProps) {
-    const defaultProps = {
-      formatlessSummaryTypes: [],
-      messages: {},
-    };
-    super({ ...defaultProps, ...props });
+  static defaultProps = {
+    formatlessSummaryTypes: [],
+    messages: {},
   }
 
   renderContent(column, columnSummaries) {

@@ -22,15 +22,12 @@ class TableSelectionBase extends React.PureComponent<TableSelectionProps> {
   };
   static COLUMN_TYPE = TABLE_SELECT_TYPE;
 
-  constructor(props: TableSelectionProps) {
-    const defaultProps = {
-      highlightRow: false,
-      selectByRowClick: false,
-      showSelectAll: false,
-      showSelectionColumn: true,
-    };
-    super({ ...defaultProps, ...props });
-  }
+  static defaultProps = {
+    highlightRow: false,
+    selectByRowClick: false,
+    showSelectAll: false,
+    showSelectionColumn: true,
+  };
 
   render() {
     const {
