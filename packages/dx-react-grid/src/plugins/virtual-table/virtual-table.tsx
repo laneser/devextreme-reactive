@@ -46,12 +46,6 @@ export const makeVirtualTable: (...args: any) => any = (Table, {
   defaultHeight,
 }) => {
   class VirtualTable extends React.PureComponent<VirtualTableProps, VirtualTablePluginState> {
-    static defaultProps = {
-      estimatedRowHeight: defaultEstimatedRowHeight,
-      height: defaultHeight,
-      skeletonCellComponent: SkeletonCell,
-      onTopRowChange: () => {},
-    };
     static FixedHeader: React.ComponentType;
     static FixedFooter: React.ComponentType;
     static SkeletonCell: React.ComponentType;
@@ -91,9 +85,10 @@ export const makeVirtualTable: (...args: any) => any = (Table, {
 
     render() {
       const {
-        height,
-        estimatedRowHeight,
-        skeletonCellComponent: SkeletonStubCell,
+        height = defaultHeight,
+        estimatedRowHeight = defaultEstimatedRowHeight,
+        skeletonCellComponent: SkeletonStubCell = SkeletonCell,
+        onTopRowChange = () => {},
         children,
         ...restProps
       } = this.props;

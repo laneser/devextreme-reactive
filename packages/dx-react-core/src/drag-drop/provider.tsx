@@ -28,23 +28,19 @@ export class DragDropProviderCore {
   }
 }
 
-const defaultProps = {
-  onChange: ({ payload, clientOffset }) => {},
+type DragDropProviderProps = {
+  onChange?: ({ payload, clientOffset }: { payload: any; clientOffset: any }) => void;
+  children?: React.ReactNode;
 };
-type DragDropProviderDefaultProps = Readonly<typeof defaultProps>;
-type DragDropProviderProps = Partial<DragDropProviderDefaultProps>;
 
 /** @internal */
 // tslint:disable-next-line: max-classes-per-file
-export class DragDropProvider extends React.Component<
-  DragDropProviderProps & DragDropProviderDefaultProps
-> {
-  static defaultProps = defaultProps;
+export class DragDropProvider extends React.Component<DragDropProviderProps> {
   dragDropProvider: DragDropProviderCore;
 
   constructor(props) {
     super(props);
-    const { onChange } = this.props;
+    const { onChange = () => {} } = this.props;
 
     this.dragDropProvider = new DragDropProviderCore();
 

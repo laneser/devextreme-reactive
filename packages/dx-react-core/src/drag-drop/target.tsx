@@ -4,17 +4,16 @@ import { DragDropContext } from './context';
 
 const clamp = (value, min, max) => Math.max(Math.min(value, max), min);
 
-const defaultProps = {
-  onEnter: (args) => {},
-  onOver: (args) => {},
-  onLeave: (args) => {},
-  onDrop: (args) => {},
+type DropTargetProps = {
+  onEnter?: (args: any) => void;
+  onOver?: (args: any) => void;
+  onLeave?: (args: any) => void;
+  onDrop?: (args: any) => void;
+  children?: React.ReactNode;
 };
-type DropTargetDefaultProps = Readonly<typeof defaultProps>;
 
 /** @internal */
-export class DropTarget extends React.Component<DropTargetDefaultProps> {
-  static defaultProps = defaultProps;
+export class DropTarget extends React.Component<DropTargetProps> {
   isOver: boolean;
   elementRef: React.RefObject<Element>;
 
@@ -51,7 +50,7 @@ export class DropTarget extends React.Component<DropTargetDefaultProps> {
       bottom,
     } = this.elementRef.current!.getBoundingClientRect();
     const {
-      onDrop, onEnter, onLeave, onOver,
+      onDrop = () => {}, onEnter = () => {}, onLeave = () => {}, onOver = () => {},
     } = this.props;
     const isOver = clientOffset
       && clamp(clientOffset.x, left, right) === clientOffset.x

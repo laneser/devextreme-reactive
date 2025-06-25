@@ -51,10 +51,6 @@ const styles: Record<string, React.CSSProperties> = {
 
 /** @internal */
 export class Sizer extends React.Component<SizerProps> {
-  static defaultProps = {
-    containerComponent: 'div',
-  };
-
   rootRef: React.RefObject<HTMLElement>;
 
   rootNode!: HTMLElement;
@@ -167,7 +163,7 @@ export class Sizer extends React.Component<SizerProps> {
   render() {
     const {
       onSizeChange,
-      containerComponent: Container,
+      containerComponent: Container = 'div', // 預設值
       style,
       scrollTop,
       scrollLeft,

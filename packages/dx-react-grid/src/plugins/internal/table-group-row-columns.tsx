@@ -20,7 +20,7 @@ const showColumnWhenGroupedGetter: ShowColumnWhenGroupedGetterFn = (
 export const TableColumnsWithGrouping: React.FunctionComponent<
   TableColumnsWithGroupingProps
 > = React.memo(({
-  indentColumnWidth, showColumnsWhenGrouped, columnExtensions,
+  indentColumnWidth = 0, showColumnsWhenGrouped, columnExtensions,
 }) => {
   const tableColumnsComputed = ({
     columns, tableColumns, grouping, draftGrouping,
@@ -39,7 +39,3 @@ export const TableColumnsWithGrouping: React.FunctionComponent<
     </Plugin>
   );
 });
-
-TableColumnsWithGrouping.defaultProps = {
-  indentColumnWidth: 0,
-};

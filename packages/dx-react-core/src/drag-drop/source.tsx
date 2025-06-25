@@ -2,20 +2,21 @@ import * as React from 'react';
 import { DragDropContext } from './context';
 import { Draggable } from '../draggable';
 
-const defaultProps = {
-  onStart: ({ clientOffset }) => {},
-  onUpdate: ({ clientOffset }) => {},
-  onEnd: ({ clientOffset }) => {},
-};
-type DragSourceDefaultProps = Readonly<typeof defaultProps>;
 type DragSourceProps = {
   payload: any;
   ref?: React.Ref<Element>;
-} & Partial<DragSourceDefaultProps>;
+  onStart?: ({ clientOffset }: { clientOffset: { x: number; y: number } }) => void;
+  onUpdate?: ({ clientOffset }: { clientOffset: { x: number; y: number } }) => void;
+  onEnd?: ({ clientOffset }: { clientOffset: { x: number; y: number } }) => void;
+  children?: React.ReactNode;
+};
 
 /** @internal */
 export const DragSource: React.FC<DragSourceProps> = React.forwardRef(({
-  onStart, onUpdate, onEnd, payload, children,
+  onStart = () => {},
+  onUpdate = () => {},
+  onEnd = () => {},
+  payload, children,
 }, ref) => {
   const context = React.useContext(DragDropContext);
   const dragDropProvider = context;
@@ -40,4 +41,3 @@ export const DragSource: React.FC<DragSourceProps> = React.forwardRef(({
     </Draggable>
   );
 });
-DragSource.defaultProps = defaultProps;
