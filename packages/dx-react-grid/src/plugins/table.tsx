@@ -57,9 +57,9 @@ class TableBase extends React.PureComponent<TableProps> {
     stubHeaderCellComponent: 'StubHeaderCell',
   };
 
-  constructor(props: TableProps) {
-    super({ messages: {}, ...props });
-  }
+  static defaultProps = {
+    messages: {},
+  };
 
   render() {
     const {

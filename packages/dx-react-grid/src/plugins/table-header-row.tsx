@@ -29,13 +29,11 @@ class TableHeaderRowBase extends React.PureComponent<TableHeaderRowProps> {
     groupButtonComponent: 'GroupButton',
   };
 
-  constructor(props: TableHeaderRowProps) {
-    super({
-      showSortingControls: false,
-      showGroupingControls: false,
-      messages: {}, ...props
-    });
-  }
+  static defaultProps = {
+    showSortingControls: false,
+    showGroupingControls: false,
+    messages: {},
+  };
 
   render() {
     const {
