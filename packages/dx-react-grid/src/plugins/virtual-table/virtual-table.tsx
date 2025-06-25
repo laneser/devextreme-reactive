@@ -88,7 +88,7 @@ export const makeVirtualTable: (...args: any) => any = (Table, {
         height = defaultHeight,
         estimatedRowHeight = defaultEstimatedRowHeight,
         skeletonCellComponent: SkeletonStubCell = SkeletonCell,
-        onTopRowChange = () => {},
+        onTopRowChange = () => { },
         children,
         ...restProps
       } = this.props;
@@ -116,8 +116,6 @@ export const makeVirtualTable: (...args: any) => any = (Table, {
                   { availableRowCount, loadedRowsStart, tableBodyRows, isDataRemote, viewport },
                   { setViewport },
                 ) => {
-
-                  const { onTopRowChange } = this.props;
                   const rowId = getTopRowId(viewport, tableBodyRows, isDataRemote);
 
                   onTopRowChange(rowId);
